@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import { v4 as uuidv4 } from "uuid";
 
 const AddNoteModal = (props) => {
-  const [title, setTitle] = useState({
+  const [noteDescription, setNoteDescription] = useState({
     title: "",
     description: "",
     dateCreated: new Date().toLocaleDateString("en-us", {
@@ -12,16 +13,18 @@ const AddNoteModal = (props) => {
       day: "numeric",
     }),
     category: "",
+    id: uuidv4(),
   });
+
   const handleChange = (event) => {
-    let data = { ...title };
+    let data = { ...noteDescription };
     data[event.target.name] = event.target.value;
-    setTitle(data);
-    console.log(data);
+    setNoteDescription(data);
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.saveNote(title);
+    let data = { ...noteDescription, id: uuidv4() };
+    props.addNote(data);
   };
 
   return (
@@ -29,17 +32,17 @@ const AddNoteModal = (props) => {
       size="lg"
       show={props.show}
       onHide={props.onHide}
-      aria-labelledby="example-modal-sizes-title-lg"
+      aria-labelledby="example-modal-sizes-noteDescription-lg"
     >
       <form onSubmit={handleSubmit}>
         <Modal.Header closeButton>
           <input
-            onChange={(event) => handleChange(event)}
             name="title"
             type="text"
             className="form-control m-2"
             placeholder="Title"
             required
+            onChange={(event) => handleChange(event)}
           />
           <select
             name="category"

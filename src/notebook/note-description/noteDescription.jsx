@@ -1,37 +1,57 @@
-import { MdModeEditOutline } from "react-icons/md";
+import Card from "react-bootstrap/Card";
+import { useState, useEffect } from "react";
 
 const NoteDescription = (props) => {
-  if (props.descripton) return null;
+  let firstSpecificNote = props.specificNote[0];
+
+  const [updateNote, setUpdateNote] = useState({ ...firstSpecificNote });
+
+  useEffect(() => {
+    setUpdateNote(firstSpecificNote);
+  }, [firstSpecificNote]);
+
+  const handleChange = (event) => {
+    let data = { ...updateNote };
+    data[event.target.name] = event.target.value;
+    setUpdateNote(data);
+  };
+
   return (
     <div>
-      <h2 className="m-2">Note Description:</h2>
-      <div>
-        {props.specificNote.map((note, index) => (
-          <div key={index} className="card card-body m-2 bg-light">
-            <span className="side-stick"></span>
-            <h3
-              value={note.title}
-              className="note-title text-truncate w-75 mb-0"
-            >
-              {note.title}
-            </h3>
-            <p className="note-date font-12 text-muted">{note.dateCreated}</p>
-            <div className="note-content">
-              <p className="note-inner-content h5 text-bold">
-                {note.description}
-              </p>
-            </div>
-            <div>
-              <MdModeEditOutline
-                type="button"
-                onClick={props.showModal}
-              ></MdModeEditOutline>
-            </div>
-          </div>
-        ))}
-      </div>
+      <Card className="m-2">
+        <Card.Body>
+          <Card.Title>
+            <input
+              value={updateNote.title}
+              name="title"
+              style={{ fontSize: 30 }}
+              type="email"
+              className="form-control bg-light"
+              onChange={(event) => handleChange(event)}
+            ></input>
+          </Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">
+            {updateNote.dateCreated}
+          </Card.Subtitle>
+          <Card.Text>
+            <textarea
+              name="description"
+              style={{ fontFamily: "cursive" }}
+              value={updateNote.description}
+              className="form-control bg-light"
+              rows="12"
+              onChange={(event) => handleChange(event)}
+            ></textarea>
+          </Card.Text>
+          <button
+            onClick={() => props.change(updateNote, updateNote.id)}
+            className="btn btn-success"
+          >
+            Update
+          </button>
+        </Card.Body>
+      </Card>
     </div>
   );
 };
-
 export default NoteDescription;

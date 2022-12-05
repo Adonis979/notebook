@@ -1,10 +1,11 @@
 import React from "react";
 
-const Listing = (props) => {
+const SearchingAndAdd = (props) => {
   return (
     <div className="row justify-content-md-center">
       <div className="col col-md-auto">
         <input
+          onChange={(event) => props.onSearch(event.target.value)}
           type="search"
           className="form-control m-2"
           placeholder="Search for notes"
@@ -19,4 +20,4 @@ const Listing = (props) => {
   );
 };
 
-export default Listing;
+export default SearchingAndAdd;
