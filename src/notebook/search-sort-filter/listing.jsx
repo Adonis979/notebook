@@ -2,7 +2,7 @@ import React from "react";
 
 const SearchingAndAdd = (props) => {
   return (
-    <div className="row justify-content-md-center">
+    <div className="row">
       <div className="col col-md-auto">
         <input
           onChange={(event) => props.onSearch(event.target.value)}

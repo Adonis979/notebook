@@ -31,12 +31,12 @@ const NoteDescription = (props) => {
             ></input>
           </Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
-            {updateNote.dateCreated}
+            {`${updateNote.category} · ${updateNote.dateCreated}`}
           </Card.Subtitle>
           <Card.Text>
             <textarea
               name="description"
-              style={{ fontFamily: "cursive" }}
+              style={{ fontFamily: "initial" }}
               value={updateNote.description}
               className="form-control bg-light"
               rows="12"

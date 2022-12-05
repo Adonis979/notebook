@@ -20,6 +20,7 @@ const NoteList = (props) => {
         sortList={props.sortList}
         buttonsDetails={buttonsDetails}
       ></Buttons>
+      <h3 className="m-2">All Notes:</h3>
       <List
         openNote={props.openNote}
         showNotes={props.showNotes}

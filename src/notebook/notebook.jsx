@@ -78,12 +78,12 @@ const Notebook = () => {
   if (specificNote.length > 0) {
     return (
       <React.Fragment>
-        <SearchingAndAdd
-          onSearch={handleSearch}
-          showModal={showModal}
-        ></SearchingAndAdd>
         <div className="row">
           <div className="col-5">
+            <SearchingAndAdd
+              onSearch={handleSearch}
+              showModal={showModal}
+            ></SearchingAndAdd>
             <NoteList
               sortList={sortList}
               openNote={openNote}
